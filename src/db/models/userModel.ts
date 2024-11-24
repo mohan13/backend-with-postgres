@@ -33,6 +33,11 @@ class User extends Model {
     type: DataType.STRING,
   })
   declare password: string;
+
+  @Column({
+    type: DataType.STRING,
+  })
+  declare userImage: string;
 }
 
 export default User;
