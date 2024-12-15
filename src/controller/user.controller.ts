@@ -57,7 +57,7 @@ const loginUser = asyncHandler(async (req: Request, res: Response) => {
   if (isMatched) {
     //generate token and sent to user
   } else {
-    throw new ApiError(403, "Invalid email or password");
+    throw new ApiError(403, "Invalid user credentials");
   }
 
   const token = jwt.sign(
@@ -68,22 +68,16 @@ const loginUser = asyncHandler(async (req: Request, res: Response) => {
     { expiresIn: "20d" }
   );
 
-  const options = { httpOnly: true, secure: true };
-
-  res
-    .status(200)
-    .cookie("token", token, options)
-    .json(
-      new ApiResponse(
-        200,
-        {
-          data: { email: data.email, role: data.role, username: data.username },
-          token: token,
-        },
-
-        "Logged in successfully"
-      )
-    );
+  return res.status(200).json(
+    new ApiResponse(
+      200,
+      {
+        user: { email: data.email, role: data.role, username: data.username },
+        token: token,
+      },
+      "Logged in successfully"
+    )
+  );
 });
 
 const logoutUser = asyncHandler(async (req: Request, res: Response) => {
