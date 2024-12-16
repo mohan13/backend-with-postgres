@@ -30,6 +30,7 @@ app.listen(PORT, () => {
 
 //routes import
 import userRouter from "./routes/user.routes";
+import roomRouter from "./routes/room.routes";
 import adminSeeder from "./adminSeeders";
 
 //admin seeder
@@ -37,3 +38,4 @@ adminSeeder();
 
 //routes declaration
 app.use("/api/v1/users", userRouter);
+app.use("/api/v1/rooms", roomRouter);

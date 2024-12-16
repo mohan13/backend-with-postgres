@@ -1,6 +1,7 @@
 import { Sequelize } from "sequelize-typescript";
 import User from "./models/userModel";
-import Product from "./models/productModel";
+import Rooms from "./models/roomModel";
+import Locations from "./models/locationModel";
 
 const sequelize = new Sequelize({
   database: process.env.DB_NAME,
@@ -25,12 +26,15 @@ sequelize
 
 //relationship
 //user ko dherai product huna sakxa
-User.hasMany(Product, {
+User.hasMany(Rooms, {
   foreignKey: "userId",
 });
 //product dherai user sanga belong huna sakxa
-Product.belongsTo(User, {
+Rooms.belongsTo(User, {
   foreignKey: "userId",
 });
+
+Locations.belongsTo(Rooms, { foreignKey: "locationId" });
+Rooms.hasOne(Locations, { foreignKey: "locationId" });
 
 export default sequelize;
