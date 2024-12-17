@@ -78,6 +78,11 @@ const getRoomDetails = asyncHandler(
       where: {
         id: id,
       },
+      include: [
+        {
+          model: User,
+        },
+      ],
     });
 
     if (!room) {
