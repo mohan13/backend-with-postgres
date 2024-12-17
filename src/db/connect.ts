@@ -1,7 +1,6 @@
 import { Sequelize } from "sequelize-typescript";
 import User from "./models/userModel";
 import Rooms from "./models/roomModel";
-import Locations from "./models/locationModel";
 
 const sequelize = new Sequelize({
   database: process.env.DB_NAME,
@@ -20,9 +19,7 @@ sequelize
   })
   .catch((err) => console.log(err));
 
-sequelize
-  .sync({ force: false })
-  .then(() => console.log("Drop and re-sync db."));
+sequelize.sync({ force: true }).then(() => console.log("Drop and re-sync db."));
 
 //relationship
 //user ko dherai product huna sakxa
@@ -33,8 +30,5 @@ User.hasMany(Rooms, {
 Rooms.belongsTo(User, {
   foreignKey: "userId",
 });
-
-Locations.belongsTo(Rooms, { foreignKey: "locationId" });
-Rooms.hasOne(Locations, { foreignKey: "locationId" });
 
 export default sequelize;

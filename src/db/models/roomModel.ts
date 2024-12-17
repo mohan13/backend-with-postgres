@@ -40,19 +40,23 @@ class Rooms extends Model {
   declare currency: string;
 
   @Column({
-    type: DataType.DATE,
+    type: DataType.JSON,
   })
-  declare start_date: string;
+  declare availability: {
+    start_date: string;
+    end_date: string;
+    is_available: boolean;
+  };
 
   @Column({
-    type: DataType.DATE,
+    type: DataType.JSON, // JSON field to store object
   })
-  declare end_date: string;
-
-  @Column({
-    type: DataType.BOOLEAN,
-  })
-  declare is_available: boolean;
+  declare location: {
+    address: string;
+    city: string;
+    state: string;
+    country: string;
+  };
 
   @Column({
     type: DataType.ARRAY(DataType.STRING),

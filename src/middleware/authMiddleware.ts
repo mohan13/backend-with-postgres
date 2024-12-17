@@ -16,6 +16,7 @@ export interface AuthRequest extends Request {
 
 export enum Role {
   Admin = "admin",
+  Host = "host",
   Customer = "customer",
 }
 
