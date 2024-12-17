@@ -81,6 +81,7 @@ const getRoomDetails = asyncHandler(
       include: [
         {
           model: User,
+          attributes: ["id", "username", "role", "email", "userImage"],
         },
       ],
     });
