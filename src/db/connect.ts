@@ -19,7 +19,9 @@ sequelize
   })
   .catch((err) => console.log(err));
 
-sequelize.sync({ force: true }).then(() => console.log("Drop and re-sync db."));
+sequelize
+  .sync({ force: false })
+  .then(() => console.log("Drop and re-sync db."));
 
 //relationship
 //user ko dherai product huna sakxa
