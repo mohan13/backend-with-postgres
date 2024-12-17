@@ -16,7 +16,7 @@ router
   .route("/")
   .post(
     verifyJWT,
-    restrictTo(Role.Customer),
+    restrictTo(Role.Admin),
     upload.array("roomImages", 12),
     createRooms
   )
@@ -25,7 +25,7 @@ router
 router
   .route("/:id")
   .get(getRoomDetails)
-  .delete(verifyJWT, restrictTo(Role.Customer), deleteRoom)
-  .patch(verifyJWT, restrictTo(Role.Customer), updateRoom);
+  .delete(verifyJWT, restrictTo(Role.Admin), deleteRoom)
+  .patch(verifyJWT, restrictTo(Role.Admin), updateRoom);
 
 export default router;
