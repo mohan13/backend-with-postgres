@@ -5,7 +5,7 @@ import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import User from "../db/models/userModel";
 import { ApiResponse } from "../utils/ApiResponse";
-import { AuthRequest } from "../middleware/authMiddleware";
+import { AuthRequest, Role } from "../middleware/authMiddleware";
 
 const registerUser = asyncHandler(async (req: Request, res: Response) => {
   const { username, email, password } = req.body;

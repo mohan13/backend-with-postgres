@@ -132,8 +132,11 @@ const updateRoom = asyncHandler(
       amenities,
       availability,
       location,
-      roomImages,
     } = req.body;
+
+    let images = req.files as Express.Multer.File[];
+
+    const roomsImages = images.map((file) => file.filename);
 
     const updatedRoom = await Rooms.update(
       {
@@ -145,7 +148,7 @@ const updateRoom = asyncHandler(
         amenities,
         availability,
         location,
-        roomImages,
+        roomImages: roomsImages,
       },
       {
         where: {

@@ -22,10 +22,11 @@ app.use(express.json());
 //url bata data ayema teslai samjhes
 app.use(express.urlencoded({ extended: true, limit: "16kb" }));
 
-app.use(express.static("public"));
 app.listen(PORT, () => {
   console.log("Server has started at port", PORT);
 });
+
+app.use(express.static("public"));
 
 //routes import
 import userRouter from "./routes/user.routes";
