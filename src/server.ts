@@ -20,7 +20,6 @@ require("./db/connect");
 app.use(express.json());
 
 //url bata data ayema teslai samjhes
-app.use(express.urlencoded({ extended: true, limit: "16kb" }));
 
 app.listen(PORT, () => {
   console.log("Server has started at port", PORT);

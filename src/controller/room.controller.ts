@@ -16,9 +16,12 @@ const createRooms = asyncHandler(
       price_per_night,
       currency,
       amenities,
-      availability,
       location,
     } = req.body;
+
+    // Parse JSON strings (location and amenities)
+    const parsedLocation = JSON.parse(location); // Convert location from string to object
+    const parsedAmenities = JSON.parse(amenities); // Convert amenities from string to array
 
     let images = req.files as Express.Multer.File[];
 
@@ -26,16 +29,10 @@ const createRooms = asyncHandler(
 
     if (
       [title, roomDescription, roomType, currency].some(
-        (field) => field?.trim() === ""
+        (field) => field?.trim() == ""
       ) ||
-      !Array.isArray(amenities) ||
-      amenities.length === 0 ||
-      !availability ||
-      Object.keys(location).length === 0 ||
-      !location.address ||
-      !location.city ||
-      !location.state ||
-      !location.country
+      Object.keys(parsedAmenities).length == 0 ||
+      Object.keys(parsedLocation).length == 0
     ) {
       throw new ApiError(400, "All fields are required");
     }
@@ -44,11 +41,10 @@ const createRooms = asyncHandler(
       title,
       roomDescription,
       roomType,
-      amenities,
+      amenities: parsedAmenities,
       price_per_night,
       currency,
-      location,
-      availability,
+      location: parsedLocation,
       roomImages: roomsImages,
       userId: userId,
     });
