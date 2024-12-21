@@ -26,6 +26,7 @@ app.listen(PORT, () => {
 });
 
 app.use(express.static("public"));
+app.use(express.urlencoded({ extended: true, limit: "2mb" }));
 
 //routes import
 import userRouter from "./routes/user.routes";

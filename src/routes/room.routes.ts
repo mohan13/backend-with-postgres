@@ -26,6 +26,11 @@ router
   .route("/:id")
   .get(getRoomDetails)
   .delete(verifyJWT, restrictTo(Role.Admin), deleteRoom)
-  .patch(verifyJWT, restrictTo(Role.Admin), updateRoom);
+  .patch(
+    verifyJWT,
+    restrictTo(Role.Admin),
+    upload.array("roomImages", 12),
+    updateRoom
+  );
 
 export default router;

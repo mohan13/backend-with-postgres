@@ -15,12 +15,14 @@ const createRooms = asyncHandler(
       roomType,
       price_per_night,
       currency,
+      availability,
       amenities,
       location,
     } = req.body;
 
     // Parse JSON strings (location and amenities)
     const parsedLocation = JSON.parse(location); // Convert location from string to object
+    const parsedAvailability = JSON.parse(availability);
     const parsedAmenities = JSON.parse(amenities); // Convert amenities from string to array
 
     let images = req.files as Express.Multer.File[];
@@ -31,6 +33,7 @@ const createRooms = asyncHandler(
       [title, roomDescription, roomType, currency].some(
         (field) => field?.trim() == ""
       ) ||
+      Object.keys(parsedAvailability).length == 0 ||
       Object.keys(parsedAmenities).length == 0 ||
       Object.keys(parsedLocation).length == 0
     ) {
@@ -43,6 +46,7 @@ const createRooms = asyncHandler(
       roomType,
       amenities: parsedAmenities,
       price_per_night,
+      availability: parsedAvailability,
       currency,
       location: parsedLocation,
       roomImages: roomsImages,
@@ -125,10 +129,14 @@ const updateRoom = asyncHandler(
       roomType,
       price_per_night,
       currency,
-      amenities,
       availability,
+      amenities,
       location,
     } = req.body;
+
+    const parsedAvailability = JSON.parse(availability);
+    const parsedLocation = JSON.parse(location); // Convert location from string to object
+    const parsedAmenities = JSON.parse(amenities); // Convert amenities from string to array
 
     let images = req.files as Express.Multer.File[];
 
@@ -141,14 +149,14 @@ const updateRoom = asyncHandler(
         roomType,
         price_per_night,
         currency,
-        amenities,
-        availability,
-        location,
+        availability: parsedAvailability,
+        amenities: parsedAmenities,
+        location: parsedLocation,
         roomImages: roomsImages,
       },
       {
         where: {
-          id,
+          id: id,
         },
       }
     );
