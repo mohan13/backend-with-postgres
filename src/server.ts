@@ -10,7 +10,7 @@ const PORT: number = 4000;
 
 app.use(
   cors({
-    origin: ["http://localhost:5173", "https://fake-airbnb-psi.vercel.app"],
+    origin: "*",
     credentials: true,
   })
 );
