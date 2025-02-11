@@ -6,16 +6,13 @@ export interface BookingData {
     children: number;
     infants: number;
   };
-  priceTotal: number;
+  hotelId: string;
+  totalAmount: number;
   paymentDetails: {
     paymentMethod: PaymentMethod;
     paymentStatus?: paymentStatus;
     pidx?: string;
   };
-}
-
-export interface BookingDetails {
-  productId: string;
 }
 
 export enum PaymentMethod {

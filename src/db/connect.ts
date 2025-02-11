@@ -2,6 +2,7 @@ import { Sequelize } from "sequelize-typescript";
 import User from "./models/userModel";
 import Rooms from "./models/roomModel";
 import Bookings from "./models/bookingModel";
+import Payment from "./models/pyamentModel";
 
 const sequelize = new Sequelize({
   database: process.env.DB_NAME,
@@ -37,6 +38,11 @@ Rooms.belongsTo(User, {
 User.hasMany(Bookings, { foreignKey: "userId" });
 Bookings.belongsTo(User, {
   foreignKey: "userId",
+});
+
+Payment.hasOne(Bookings, { foreignKey: "paymentId" });
+Bookings.belongsTo(Payment, {
+  foreignKey: "paymentId",
 });
 
 Rooms.hasMany(Bookings, { foreignKey: "roomId" });

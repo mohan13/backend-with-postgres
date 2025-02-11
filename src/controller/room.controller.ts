@@ -4,6 +4,8 @@ import { AuthRequest } from "../middleware/authMiddleware";
 import { ApiError } from "../utils/ApiError";
 import { ApiResponse } from "../utils/ApiResponse";
 import { asyncHandler } from "../utils/asyncHandler";
+import fs from "fs";
+
 import User from "../db/models/userModel";
 
 const createRooms = asyncHandler(
@@ -141,6 +143,13 @@ const updateRoom = asyncHandler(
     let images = req.files as Express.Multer.File[];
 
     const roomsImages = images.map((file) => file.filename);
+    const existingImage = Rooms.findOne({
+      where: {
+        id: id,
+      },
+    });
+
+    console.log("files", roomsImages, existingImage);
 
     const updatedRoom = await Rooms.update(
       {

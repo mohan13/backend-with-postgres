@@ -10,7 +10,7 @@ const PORT: number = 4000;
 
 app.use(
   cors({
-    origin: process.env.CORS_ORIGIN,
+    origin: ["http://localhost:5173", "https://fake-airbnb-psi.vercel.app/"],
     credentials: true,
   })
 );
@@ -31,6 +31,7 @@ app.use(express.urlencoded({ extended: true, limit: "2mb" }));
 //routes import
 import userRouter from "./routes/user.routes";
 import roomRouter from "./routes/room.routes";
+import bookingRouter from "./routes/booking.routes";
 import adminSeeder from "./adminSeeders";
 
 //admin seeder
@@ -39,3 +40,4 @@ adminSeeder();
 //routes declaration
 app.use("/api/v1/users", userRouter);
 app.use("/api/v1/rooms", roomRouter);
+app.use("/api/v1/booking", bookingRouter);
