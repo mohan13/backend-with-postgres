@@ -7,10 +7,20 @@ import * as dotenv from "dotenv";
 dotenv.config({});
 
 const PORT: number = 4000;
+const allowedOrigins = [
+  "http://localhost:5173",
+  "https://fake-airbnb-psi.vercel.app",
+];
 
 app.use(
   cors({
-    origin: "*",
+    origin: function (origin, callback) {
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
     credentials: true,
   })
 );
