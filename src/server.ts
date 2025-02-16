@@ -45,7 +45,6 @@ import userRouter from "./routes/user.routes";
 import roomRouter from "./routes/room.routes";
 import bookingRouter from "./routes/booking.routes";
 import adminSeeder from "./adminSeeders";
-import helmet from "helmet";
 
 //admin seeder
 adminSeeder();
