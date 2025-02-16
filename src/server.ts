@@ -1,5 +1,6 @@
 import express, { Application, Request, Response } from "express";
 const app: Application = express();
+import helmet from "helmet";
 import cors from "cors";
 
 import * as dotenv from "dotenv";
@@ -12,6 +13,7 @@ const allowedOrigins = [
   "https://fake-airbnb-psi.vercel.app",
 ];
 
+app.use(helmet());
 app.use(
   cors({
     origin: function (origin, callback) {
@@ -43,6 +45,7 @@ import userRouter from "./routes/user.routes";
 import roomRouter from "./routes/room.routes";
 import bookingRouter from "./routes/booking.routes";
 import adminSeeder from "./adminSeeders";
+import helmet from "helmet";
 
 //admin seeder
 adminSeeder();
